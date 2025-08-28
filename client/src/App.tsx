@@ -1,7 +1,4 @@
 
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import { Home } from './pages'
 import AnnouncementsPage from './pages/AnnouncementsPage'
 
 
