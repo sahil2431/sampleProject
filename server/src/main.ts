@@ -10,7 +10,7 @@ async function bootstrap() {
   app.use(helmet());
 
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: 'https://sample-project-brown.vercel.app',
     credentials: true,
   });
 
