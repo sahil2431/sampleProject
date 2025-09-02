@@ -80,6 +80,7 @@ const userId = "user-123"; // This should come from your auth context or similar
   };
 
   useEffect(() => {
+    setCommentLimit(5);
     fetchAnnouncements();
   }, []);
 
