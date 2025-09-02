@@ -1,6 +1,6 @@
 # Announcements 2.0 – Delivery Packet
 
-> **Status**: Frontend is live at **[https://sample-project-brown.vercel.app/](https://sample-project-brown.vercel.app/)**. Replace `BACKEND_BASE_URL` below with your Render API URL.
+> **Status**: Frontend is live at **[https://sample-project-brown.vercel.app/](https://sample-project-brown.vercel.app/)**. Replace `https://sampleproject-pc7p.onrender.com` below with your Render API URL.
 
 ---
 
@@ -16,9 +16,9 @@
 ## 🔗 Live URLs
 
 * **UI (Vercel):** [https://sample-project-brown.vercel.app/](https://sample-project-brown.vercel.app/)
-* **API (Render):** `https://<your-api>.onrender.com` → replace everywhere in this doc as `BACKEND_BASE_URL`.
-* **OpenAPI Docs:** `BACKEND_BASE_URL/docs`
-* **Health:** `BACKEND_BASE_URL/health`
+* **API (Render):** `https://<your-api>.onrender.com` → replace everywhere in this doc as `https://sampleproject-pc7p.onrender.com`.
+* **OpenAPI Docs:** `https://sampleproject-pc7p.onrender.com/docs`
+* **Health:** `https://sampleproject-pc7p.onrender.com/health`
 
 ---
 
@@ -43,7 +43,7 @@ IDEMPOTENCY_TTL_SECONDS=300
 Create `.env` (Vite expects `VITE_` prefix):
 
 ```
-VITE_API_BASE=BACKEND_BASE_URL
+VITE_API_BASE=https://sampleproject-pc7p.onrender.com
 ```
 
 ---
@@ -67,7 +67,7 @@ VITE_API_BASE=BACKEND_BASE_URL
 
 ## 📦 API Contracts
 
-Base URL: `BACKEND_BASE_URL`
+Base URL: `https://sampleproject-pc7p.onrender.com`
 
 ### 1) Comments
 
@@ -262,7 +262,7 @@ npm run test -- --coverage
 * Framework: Vite
 * Build Command: `npm ci && npm run build`
 * Output Dir: `dist`
-* Env: `VITE_API_BASE=BACKEND_BASE_URL`
+* Env: `VITE_API_BASE=https://sampleproject-pc7p.onrender.com`
 
 ---
 
@@ -294,7 +294,7 @@ These can later be swapped with a DB implementation.
 ### Add Comment
 
 ```bash
-curl -X POST "$BACKEND_BASE_URL/announcements/a_01H/comments" \
+curl -X POST "$https://sampleproject-pc7p.onrender.com/announcements/a_01H/comments" \
   -H 'Content-Type: application/json' \
   -d '{"authorName":"Jane","text":"Great!"}'
 ```
@@ -302,13 +302,13 @@ curl -X POST "$BACKEND_BASE_URL/announcements/a_01H/comments" \
 ### Paginate Comments
 
 ```bash
-curl "$BACKEND_BASE_URL/announcements/a_01H/comments?limit=10&cursor=c_01J8"
+curl "$https://sampleproject-pc7p.onrender.com/announcements/a_01H/comments?limit=10&cursor=c_01J8"
 ```
 
 ### Add Reaction (Idempotent)
 
 ```bash
-curl -X POST "$BACKEND_BASE_URL/announcements/a_01H/reactions" \
+curl -X POST "$https://sampleproject-pc7p.onrender.com/announcements/a_01H/reactions" \
   -H 'Content-Type: application/json' \
   -H 'X-User-Id: u_123' \
   -H 'Idempotency-Key: 8a1a9c27-5d7d-4e7e-8e9d-cbc6a6e5b3c2' \
@@ -318,7 +318,7 @@ curl -X POST "$BACKEND_BASE_URL/announcements/a_01H/reactions" \
 ### Remove Reaction
 
 ```bash
-curl -X DELETE "$BACKEND_BASE_URL/announcements/a_01H/reactions" \
+curl -X DELETE "$https://sampleproject-pc7p.onrender.com/announcements/a_01H/reactions" \
   -H 'X-User-Id: u_123'
 ```
 
@@ -326,10 +326,10 @@ curl -X DELETE "$BACKEND_BASE_URL/announcements/a_01H/reactions" \
 
 ```bash
 # First fetch
-ETAG=$(curl -i "$BACKEND_BASE_URL/announcements" | awk -F': ' '/^ETag:/ {print $2}' | tr -d '\r')
+ETAG=$(curl -i "$https://sampleproject-pc7p.onrender.com/announcements" | awk -F': ' '/^ETag:/ {print $2}' | tr -d '\r')
 
 # Conditional fetch
-curl -i "$BACKEND_BASE_URL/announcements" -H "If-None-Match: $ETAG"
+curl -i "$https://sampleproject-pc7p.onrender.com/announcements" -H "If-None-Match: $ETAG"
 ```
 
 ---
